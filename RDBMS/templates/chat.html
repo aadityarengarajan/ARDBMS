@@ -1,0 +1,80 @@
+<style>
+  body {
+	font-family: "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 20px;
+	font-weight: normal;
+  max-width: 450px;
+	margin: 50px auto;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+          flex-direction: column;
+}
+
+p {
+  max-width: 255px;
+  word-wrap: break-word;
+  margin-bottom: 12px;
+  line-height: 24px;
+  position:relative;
+	padding:10px 20px;
+  border-radius:25px;
+}
+
+p:before, p:after {
+    content:"";
+		position:absolute;
+    bottom:-2px;
+    height:20px;
+  }
+
+.from-me {
+	color:white; 
+	background:#0B93F6;
+	align-self: flex-end;
+}
+
+.from-me:before {
+		right:-7px;
+		border-right:20px solid #0B93F6;
+		border-bottom-left-radius: 16px 14px;
+		-webkit-transform:translate(0, -2px);
+		        transform:translate(0, -2px);
+	}
+
+.from-me:after {
+		right:-56px;
+		width:26px;
+		background:white;
+		border-bottom-left-radius: 10px;
+		-webkit-transform:translate(-30px, -2px);
+		        transform:translate(-30px, -2px);
+	}
+.from-them {
+	background:#E5E5EA;
+	color:black;
+}
+.from-them:before {
+		left:-7px;
+		border-left:20px solid #E5E5EA;
+		border-bottom-right-radius: 16px 14px;
+		-webkit-transform:translate(0, -2px);
+		        transform:translate(0, -2px);
+	}
+.from-them:after {
+		left:4px;
+		width:26px;
+		background:white;
+		border-bottom-right-radius: 10px;
+		-webkit-transform:translate(-30px, -2px);
+		        transform:translate(-30px, -2px);
+	}
+  </style>
+  <p class="from-me">Hey there! What's up</p>
+<p class="from-them">Checking out iOS7 you know..</p>
+<p class="from-me">Check out this bubble!</p>
+<p class="from-them">It's pretty cool!</p>
+<p class="from-them">Right?</p>
+<p class="from-me">Yeah it's pure CSS &amp; HTML</p>
+<p class="from-them">Wow that's impressive. But what's even more impressive is that this bubble is really high.</p>

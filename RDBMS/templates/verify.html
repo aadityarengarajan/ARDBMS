@@ -1,0 +1,105 @@
+<style>
+  * {
+  box-sizing: border-box;
+}
+
+html, body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  background-color: #3cad7e;
+  font-family: 'Arial', sans-serif;
+}
+
+.container h1 {
+  color: #fff;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 50px;
+}
+
+.nice-wrap {
+  position: relative;
+  width: 500px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.nice-label {
+  position: absolute;
+  top: 15px;
+  left: 10px;
+  font-size: 16px;
+  color: #a0a0a0;
+  transition: all 0.25s ease;
+}
+.nice-label.focus {
+  top: -25px;
+  left: 5px;
+  font-size: 14px;
+  color: #fff;
+}
+
+.nice-textbox {
+  position: relative;
+  display: block;
+  width: 500px;
+  margin-top: 50px;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  color: #a0a0a0;
+  outline: none;
+}
+
+</style>
+<div class="container">
+  <h1>Verification Code (Check Your E-Mail)</h1>
+  <p style="color:white" id="pTest">Didn't get the verification code? Hit back and submit the form again ;-)</p>
+  <div class="nice-wrap">
+    <input class="nice-textbox" id="tt-input" type="text"/>
+    <label class="nice-label" for="Username">Code</label>
+    <button id="search_form_input">Verify</button>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script>
+  $(document).ready(function(){
+   $('.nice-textbox').blur(function() {
+        if($(this).val().length === 0){
+          $('.nice-label').removeClass("focus");
+        }
+        else { returns; }
+      })
+      .focus(function() {
+        $('.nice-label').addClass("focus")
+      });
+});
+</script>
+<script>
+$("#search_form_input").click(function(){
+    var text = $('#tt-input').val();
+    $.ajax({
+      url: "/signup/hashapi/"+text,
+      type: "get",
+      success: function(response) {
+        var verifictn = 'Verified'
+        if (response == verifictn) {
+          $(window.location).attr('href','/signup/verified');
+          $(window).attr('location','/signup/verified');
+          $(window.location).prop('href', '/signup/verified');
+        }
+        else {
+          $('#pTest').text("Wrong Code. Didn't get the verification code? Hit back and submit the form again ;-)");
+        }
+      },
+      error: function(xhr) {
+        $('#pTest').text("Wrong Code. Didn't get the verification code? Hit back and submit the form again ;-)");
+      }
+    });
+});
+</script>

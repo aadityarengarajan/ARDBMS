@@ -1,0 +1,162 @@
+@SIGNUP(.route)
+	INPUT = name, email
+	OUTPUT = .preferences file in '/userdb' directory
+	.vague
+		User can sign up using the sign up form to sign up with microsoft. We store a file in the format of 'name.preferences' in the '/userdb'directory
+	.detailed
+		- LOG-IN FORM
+			- LOG-IN WITH MICROSOFT (GET FULL-NAME AND E-MAIL)
+			- FILL ENTRY FORM WITH DETAILS
+				- CITY* (FROM DROPDOWN)
+				- INSTAGRAM (LINK CONTAINING 'https://www.instagram.com/')
+				- FACEBOOK (LINK CONTAINING 'https://www.facebook.com/')
+				- TWITTER (LINK CONTAINING 'https://www.twitter.com/')
+				- WHATSAPP (NUMBERS WITH A '+' AS FIRST CHARACTER, COUNTRY CODE)
+				- SPOTIFY URL (LINK CONTAINING 'https://open.spotify.com/user/')
+				- THEME* (.dark/.bright)
+		- CREATE name.preferences
+			- '''
+NAME :
+E-MAIL :
+MEMBER ID :
+DATE JOINED :
+TIME JOINED :
+CITY :
+INSTAGRAM :
+FACEBOOK :
+TWITTER :
+WHATSAPP :
+SPOTIFY :
+DONATED :
+OFFICIAL MERCHANDISE :
+TOTAL MESSAGE ACTIVITY :
+ARTIST MESSAGE ACTIVITY :
+TOP STREAMER:
+PM DATE :
+THEME :
+'''
+			- DATE JOINED (DD/MM/YYYY)
+			- TIME JOINED (HH/MM/SS)
+			- DONATED (FLOAT)
+			- OFFICIAL MERCHANDISE (FLOAT)
+			- TOTAL MESSAGE ACTIVITY (# OF MESSAGES SENT IN BASE / TOTAL # OF MESSAGES)
+
+@COMMUNITY(.route)
+	INPUT = (.none)
+	OUTPUT = chat
+	.vague
+		A customizable chat interface with .dark or .light theme defined by the .preferences file, and chats will be stored in the '/chatsdb' route
+	.detailed
+		- 'community.chats' IN '/chatsdb' ROUTE TO BE DYNAMICALLY UPDATED BY HIDDEN FLASK ROUTE '/community/update' AS JSON
+			-{'sender':['message','time']}
+		- CHATS ELEMENT WILL BE RENDERED BY @COMMUNITY(.route) BUT THE DATA WILL BE RETREIVED DYNAMICALLY FROM HIDDEN FLASK ROUTE '/community/retreive' IN THE FORMAT OF JSON
+			-{'sender':['message','time']}
+
+@PROFILE/<WILDCARD>(.route)
+	INPUT = WILDCARD
+	OUTPUT = profile page
+	.vague
+		Will dynamically generate a profile page for all users from .preferences file
+	.detailed
+		- SPECIFIC HTML PROFILE TEMPLATE
+		- DATA STATICALLY RETREIVED FROM .preferences FILE BY FLASK ON LOAD
+
+@BANDCAMP(.route)
+	INPUT = (.none)
+	OUTPUT = bandcamp
+	.vague
+		Will allow fans to donate to artist via BandCamp by showing the artist's page on BandCamp
+	.detailed
+		- FULL SCREEN IFRAME OF BANDCAMP PAGE
+
+@ARTIST(.route)
+	INPUT = (.none)
+	OUTPUT = chat
+	.vague
+		A customizable chat interface with .dark or .light theme defined by the .preferences file, and chats will be stored in the '/chatsdb' route
+	.detailed
+		- 'artist.chats' IN '/chatsdb' ROUTE TO BE DYNAMICALLY UPDATED BY HIDDEN FLASK ROUTE '/artist/update' AS JSON
+			-{'sender':['message','time']}
+		- CHATS ELEMENT WILL BE RENDERED BY @ARTIST(.route) BUT THE DATA WILL BE RETREIVED DYNAMICALLY FROM HIDDEN FLASK ROUTE '/artist/retreive' IN THE FORMAT OF JSON
+			-{'sender':['message','time']}
+
+@PREVIEW(.route)
+	INPUT = (.none)
+	OUTPUT = EXCLUSIVE PREVIEWS WITH DRM PROTECTED CONTENT
+	.vague
+		A player like Spotify to prevent anyone from being able to download previewable content ; to be researched further on.
+
+@IDEATIONS(.route)
+	INPUT = (.none)
+	OUTPUT = ARTIST IDEATIONS
+	.vague
+		A twitter-like interface where artist's thoughts will be reflected and fans can simply scroll through ideations (or tweets, in plain english)
+	.detailed
+		- ARTIST IDEATIONS WILL BE STORED IN 'artist.ideations' FILE AS JSON
+			-{'date':'thought'}
+		- ARTIST IDEATIONS WILL BE RETREIVED BY FLASK STATICALLY ON LOAD
+
+@SPOTIFY(.route)
+	INPUT = SPOTIFY URL IN .preferences
+	OUTPUT = ARTIST'S WORD FOR YOU
+	.vague
+		A personal message from the artist to you based on your Spotify API JSON with conditional statements.
+	.detailed
+		- IF SPOTIFY URL FOUND IN .preferences
+			- CONTACT SPOTIFY API FOR DATA
+			- IF CHANGE IN 'SPOTIFY STREAMER' IN .preferences
+				- UPDATE 'PM DATE' WITH CURRENT DATE AND RENDER RESPECTIVE PM
+			- ELSE
+				- RENDER RESPECTIVE PM FROM FRONT-END JINJA AND RETREIVE DATE STATICALLY FROM BACK-END FROM .preferences FILE
+		- ELSE
+			- REDIRECT TO EDIT PROFILE WITH WARNING TO ADD SPOTIFY ACCOUNT FOR ARTIST'S WORD
+
+@PROFILESETTINGS(.route)
+	INPUT = (.none)
+	OUTPUT = EDITABLE PREFERENCES FILE
+	.vague
+		A page to edit personal preferences
+	.detailed
+		- CHANGE E-MAIL ID (RE-LOGIN WITH MSAL)
+		- CHANGE CITY (FROM DROPDOWN LIST)
+		- CHANGE INSTAGRAM
+		- CHANGE FACEBOOK
+		- CHANGE TWITTER
+		- CHANGE WHATSAPP
+		- CHANGE SPOTIFY
+		- CHANGE THEME
+		- DELETE ACCOUNT
+
+@DASHBOARD(.route)
+	INPUT = (.none)
+	OUTPUT = PROFILE DETAILS	
+	.vague
+		A page to view profile, and a portal for artist statistics
+	.detailed
+		- DISPLAY
+			- NAME
+			- E-MAIL
+			- MEMBER ID
+			- DATE JOINED
+			- TIME JOINED
+			- CITY
+			- DONATED
+			- OFFICIAL MERCHANDISE
+			- TOTAL MESSAGE ACTIVITY
+			- ARTIST MESSAGE ACTIVITY
+			- PM DATE
+		- PORTAL
+			- YOUTUBE
+			- SPOTIFY
+			- ANGHAMI
+			- YOUTUBE MUSIC
+			- PLAYLISTS
+			- COMMUNITY
+
+@DASHBOARD(.generic)
+	INPUT = (.none)
+	OUTPUT = PROFILE DETAILS
+	.vague
+		An idea to add total # of artist's streams on dashboard with - DISPLAY
+	.detailed
+		Web scraper to scrape streams from induvidual websites to calculate a total

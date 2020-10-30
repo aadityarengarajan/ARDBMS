@@ -1,0 +1,940 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+
+<meta charset="UTF-8">
+
+
+<title>CodePen - Dashboard Demo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+
+<style>
+*, *::before, *::after {
+box-sizing: border-box;
+}
+
+html, body {
+width: 100%;
+height: 100%;
+}
+
+body {
+background: #1C1F2B;
+color: #fff;
+margin: 0px;
+font-family: 'Open Sans', sans-serif;
+}
+
+a {
+color: #2196f3;
+transition: color 200ms;
+}
+
+.shill {
+position: fixed;
+background-image: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/726875/profile/profile-512.jpg?100000");
+background-size: cover;
+width: 40px;
+height: 40px;
+bottom: 15px;
+right: 15px;
+border-radius: 20px;
+opacity: .4;
+filter: blur(0.5px);
+-webkit-filter: blur(0.5px);
+transition: opacity 200ms, blur 200ms;
+user-drag: none;
+-webkit-user-drag: none;
+}
+.shill:hover {
+opacity: 1;
+filter: none;
+box-shadow: 6px 6px 2px rgba(0, 0, 0, 0.6);
+}
+
+:root {
+--background: #1C1F2B;
+--primary: #2196f3;
+--secondary: #1de9b6;
+}
+
+html {
+font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+line-height: 1.15;
+}
+
+body {
+display: flex;
+justify-content: center;
+padding-top: 50px;
+line-height: 1.5;
+font-size: 14px;
+overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+font-family: inherit;
+font-weight: 300;
+line-height: 1.1;
+}
+
+h2 {
+font-size: 32px;
+}
+
+h4 {
+font-size: 24px;
+}
+
+hr {
+border: none;
+border-top: 1px solid #30354a;
+}
+
+.form-control {
+background-color: #30354a;
+color: #fff;
+padding: 8px 12px;
+border: 1px solid rgba(0, 0, 0, 0.15);
+border-radius: 4px;
+line-height: 1.25;
+font-size: 14px;
+font-family: inherit;
+outline: none;
+transition: box-shadow 200ms, border-color 200ms;
+box-sizing: content-box;
+}
+.form-control:hover {
+border-color: rgba(255, 255, 255, 0.3);
+}
+.form-control:focus {
+border-color: transparent;
+box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.8);
+}
+.form-control::placeholder, .form-control::-moz-placeholder {
+color: rgba(255, 255, 255, 0.6);
+opacity: 1;
+}
+
+.container {
+display: flex;
+max-width: 1100px;
+}
+
+.row {
+display: flex;
+justify-content: space-between;
+align-items: center;
+flex-wrap: wrap;
+flex-shrink: 0;
+}
+.row:not(.fluid) {
+margin: 0 -15px;
+}
+.row.top {
+align-items: flex-start;
+}
+
+.col {
+flex: 1 1 0px;
+display: flex;
+flex-direction: column;
+padding: 0 15px;
+}
+
+.row.header {
+margin-bottom: -15px;
+}
+
+.label span {
+color: rgba(255, 255, 255, 0.6);
+font-size: 12px;
+letter-spacing: 1px;
+text-transform: uppercase;
+margin-bottom: 5px;
+line-height: 13px;
+}
+
+canvas {
+max-width: 100%;
+}
+
+.doughnut {
+flex: 0 0 33.33333%;
+text-align: center;
+}
+.doughnut .chart {
+width: 75%;
+margin: 0 auto 15px;
+}
+.doughnut strong {
+color: rgba(255, 255, 255, 0.6);
+font-size: 14px;
+}
+
+.sparklines {
+margin: -15px !important;
+}
+
+.sparkline {
+flex-grow: 1;
+width: 25%;
+padding: 0;
+}
+.sparkline .label {
+padding: 0 15px;
+}
+.sparkline .label span {
+color: rgba(255, 255, 255, 0.6);
+font-size: 12px;
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.sparkline .label h2 {
+font-size: 2rem;
+}
+.sparkline .chart {
+padding: 15px;
+}
+.sparkline .chart-container {
+height: 70px;
+}
+
+.list {
+display: flex;
+flex-direction: column;
+margin-bottom: 1rem;
+width: 100%;
+background: transparent;
+}
+.list > * {
+border: 1px solid #30354a;
+margin-bottom: -1px;
+}
+.list h6 {
+padding: 1rem 1.25rem;
+}
+.list a {
+position: relative;
+padding: 0.75rem 1.25rem;
+width: 100%;
+display: flex;
+justify-content: space-between;
+box-sizing: border-box;
+color: rgba(255, 255, 255, 0.6);
+text-decoration: none;
+font-size: 14px;
+line-height: 1.5;
+}
+.list a .progress {
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+z-index: -1;
+display: block;
+background-color: #171923;
+border-radius: inherit;
+}
+.list a span:last-child {
+color: rgba(255, 255, 255, 0.6);
+}
+.list a:hover, .list a:focus {
+background: #30354a;
+}
+.list a:active {
+background: #2196f3;
+color: #1C1F2B;
+}
+.list a:active span:last-child {
+color: #1C1F2B;
+}
+.list > :first-child {
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+}
+.list > :last-child {
+border-bottom-left-radius: 4px;
+border-bottom-right-radius: 4px;
+}
+.list + a {
+align-self: flex-start;
+font-size: 14px;
+line-height: 18px;
+margin-bottom: 30px;
+}
+
+.btn {
+display: inline-block;
+text-decoration: none;
+background: transparent;
+border-radius: 4px;
+padding: 8px 16px;
+transition: background 200ms, color 200ms;
+}
+.btn.primary {
+color: #2196f3;
+border: 1px solid #2196f3;
+}
+.btn.primary:hover {
+background: #2196f3;
+color: #fff;
+}
+
+.divider {
+position: relative;
+font-size: 12px;
+text-transform: uppercase;
+text-align: center;
+margin-top: 30px;
+margin-bottom: 30px;
+}
+.divider h3 {
+position: relative;
+display: inline-block;
+vertical-align: middle;
+background-color: #1C1F2B;
+color: rgba(255, 255, 255, 0.6);
+padding: 0 12px;
+}
+.divider::before {
+position: absolute;
+top: 50%;
+display: block;
+content: "";
+width: 100%;
+height: 1px;
+background-color: #30354a;
+}
+
+nav {
+display: flex;
+flex-direction: column;
+margin-right: 40px;
+}
+nav .header {
+display: flex;
+justify-content: space-between;
+box-sizing: border-box;
+min-width: 360px;
+padding-bottom: 20px;
+line-height: 37px;
+}
+nav .brand {
+color: #30354a;
+text-decoration: none;
+font-size: 40px;
+transition: color 200ms;
+}
+nav .brand:hover {
+color: rgba(255, 255, 255, 0.6);
+}
+nav .brand:focus {
+color: #2196f3;
+}
+nav ul li.nav-text {
+font-size: 12px;
+color: #30354a;
+text-transform: uppercase;
+letter-spacing: 1px;
+margin-bottom: 5px;
+padding: 0 15px;
+}
+nav ul li a {
+display: block;
+padding: 7px 15px;
+border-radius: 4px;
+text-decoration: none;
+line-height: 1.5;
+color: rgba(255, 255, 255, 0.6);
+font-size: 14px;
+}
+nav ul li a:hover {
+color: #fff;
+}
+nav ul li a.active {
+background: #2196f3;
+color: #1C1F2B;
+cursor: default;
+}
+nav ul li + .nav-text {
+margin-top: 20px;
+}
+
+.search {
+position: relative;
+}
+
+#sidebar {
+flex: 0 0 auto;
+width: 245px;
+}
+
+#search {
+padding: 8px 15px;
+width: 100%;
+box-sizing: border-box;
+}
+
+#date-range {
+display: flex;
+align-items: center;
+justify-content: center;
+}
+#date-range input {
+width: 70px;
+height: 17px;
+padding: 7px 5px;
+}
+#date-range input:first-child {
+border-right-color: transparent;
+border-top-right-radius: 0;
+border-bottom-right-radius: 0;
+text-align: center;
+}
+#date-range input:last-child {
+border-left-color: transparent;
+border-top-left-radius: 0;
+border-bottom-left-radius: 0;
+text-align: center;
+}
+#date-range input:hover {
+border-color: rgba(255, 255, 255, 0.3);
+}
+#date-range input:focus {
+border-color: transparent;
+}
+#date-range div {
+display: inline-block;
+width: 18px;
+height: 33px;
+background: #30354a;
+border: 1px solid rgba(0, 0, 0, 0.15);
+border-left: none;
+border-right: none;
+text-align: center;
+font-weight: bold;
+font-size: 24px;
+line-height: 29px;
+z-index: -1;
+}
+
+#menu {
+display: none;
+background: transparent;
+color: #30354a;
+padding-bottom: 2px;
+border: 1px solid #30354a;
+border-radius: 4px;
+font-size: 28px;
+cursor: pointer;
+transition: color 200ms, border-color 200ms;
+}
+#menu:hover, #menu:focus {
+color: #fff;
+border-color: #fff;
+}
+
+.btn-search {
+background: transparent;
+border: none;
+color: #fff;
+position: absolute;
+height: 100%;
+top: 0;
+right: 0;
+}
+
+@media (max-width: 1100px) {
+.container {
+  width: 800px;
+}
+
+#sidebar {
+  width: 175px;
+}
+#sidebar nav {
+  margin-right: 0;
+}
+
+.sparkline {
+  flex-basis: 50%;
+  width: 50%;
+}
+}
+@media (max-width: 800px) {
+body {
+  padding-top: 100px;
+}
+
+.container {
+  width: 575px;
+  flex-wrap: wrap;
+}
+.container > .col {
+  flex-basis: auto;
+}
+
+nav .header {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  background: #1C1F2B;
+  top: 0;
+  left: 0;
+  border-bottom: 1px solid #30354a;
+  align-items: center;
+  z-index: 10;
+  padding: 0 15px;
+}
+nav .header #menu {
+  display: block;
+}
+
+nav.open ul {
+  top: 70px;
+}
+nav ul {
+  position: fixed;
+  transition: top 500ms;
+  left: 0px;
+  top: -500px;
+  background: #1C1F2B;
+  width: 100%;
+  padding: 0;
+  z-index: 2;
+  padding: 15px 15px 0;
+  box-sizing: border-box;
+  border-bottom: 1px solid #30354a;
+}
+nav ul .divider {
+  display: none;
+}
+
+#date-range {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-width: 360px;
+  height: 70px;
+  z-index: 10;
+  pointer-events: none;
+}
+#date-range * {
+  pointer-events: all;
+}
+
+.list-container {
+  flex-basis: 100%;
+  width: 100%;
+}
+}
+@media (max-width: 800px) and (max-height: 500px) {
+nav ul {
+  overflow-y: scroll;
+  height: calc(100% - 70px);
+}
+}
+@media (max-width: 575px) {
+.container {
+  width: 100%;
+  min-width: 360px;
+}
+
+.doughnut {
+  flex-basis: 100%;
+}
+.doughnut:not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.sparkline {
+  flex-basis: 100%;
+  width: 100%;
+}
+}
+.dark-theme.pika-single {
+color: #fff;
+background: #1C1F2B;
+border: 1px solid #30354a;
+border-bottom-color: #30354a;
+}
+.dark-theme .pika-label {
+background-color: inherit;
+}
+.dark-theme .pika-prev, .dark-theme .is-rtl .pika-next {
+background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAQAAACGG/bgAAAAQ0lEQVR4Ae3KIQ4AIBTD0N0/IeHGI3UIRA3ut/Zl+ltXc5++htVAmIAwAWECwgSEKbgthEoIlRAqIVRCqINQB9nDgQd7ktwFo6UpWQAAAABJRU5ErkJggg==");
+}
+.dark-theme .pika-next, .dark-theme .is-rtl .pika-prev {
+background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAeCAQAAACGG/bgAAAAP0lEQVQ4y+3TMQoAMAgEwfwfAvvjTZ1uGzuvHhBPPGczEG+FRqqRaqQaqUaqkX6QBmmjacvQ6qEVTjsh+xizebvlaWptGXZAAAAAAElFTkSuQmCC");
+}
+.dark-theme .pika-table th, .dark-theme .pika-week, .dark-theme .is-disabled .pika-button {
+color: rgba(255, 255, 255, 0.6);
+}
+.dark-theme .pika-button {
+color: inherit;
+background: inherit;
+}
+.dark-theme .is-today .pika-button {
+font-weight: normal;
+}
+.dark-theme .is-selected .pika-button {
+color: #fff;
+background: #2196f3;
+}
+</style>
+
+<script>
+window.console = window.console || function(t) {};
+</script>
+
+
+
+<script>
+if (document.location.search.match(/type=embed/gi)) {
+  window.parent.postMessage("resize", "*");
+}
+</script>
+
+
+</head>
+
+<body translate="no" >
+<div class="container">
+<div class="col" id="sidebar">
+  <nav>
+    <div class="header"><a class="brand" href="#"><i class="fa fa-rocket"></i></a>
+      <button id="menu"><i class="fa fa-bars"></i></button>
+    </div>
+    <ul>
+      <li class="search">
+        <input class="form-control" id="search" placeholder="Search..."/>
+        <button class="btn-search"><i class="fa fa-lg fa-search"></i></button>
+      </li>
+      <li class="nav-text">Dashboards</li>
+      <li><a class="active" href="#">Overview</a></li>
+      <li><a href="#">Order history</a></li>
+      <li><a href="#">Fluid layout</a></li>
+      <li><a href="#">Icon nav</a></li>
+      <li class="nav-text">More</li>
+      <li><a href="#">Toolkit docs</a></li>
+      <li><a href="#">Bootstrap docs</a></li>
+      <li><a href="#">Light UI</a></li>
+      <li><a href="#">Example modal</a></li>
+      <li>
+        <div class="divider"></div>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="col">
+  <div class="row fluid header">
+    <div class="label"><span>Dashboards</span>
+      <h2>Overview</h2>
+    </div>
+    <div id="date-range">
+      <input class="form-control"/>
+      <div>-</div>
+      <input class="form-control"/>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="row fluid">
+    <div class="doughnut">
+      <div class="chart">
+        <canvas id="test1"></canvas>
+      </div><strong>Traffic</strong>
+      <h4>New vs Returning</h4>
+    </div>
+    <div class="doughnut">
+      <div class="chart">
+        <canvas id="test2"></canvas>
+      </div><strong>Revenue</strong>
+      <h4>New vs Recurring</h4>
+    </div>
+    <div class="doughnut">
+      <div class="chart">
+        <canvas id="test3"></canvas>
+      </div><strong>Traffic</strong>
+      <h4>Direct vs Referrals</h4>
+    </div>
+  </div>
+  <div class="divider">
+    <h3>Quick Stats</h3>
+  </div>
+  <div class="row sparklines">
+    <div class="col sparkline">
+      <div class="chart">
+        <div class="label"><span>Page Views</span>
+          <h2>1,293</h2>
+        </div>
+        <div class="chart-container">
+          <canvas id="test4"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col sparkline">
+      <div class="chart">
+        <div class="label"><span>Downloads</span>
+          <h2>758</h2>
+        </div>
+        <div class="chart-container">
+          <canvas id="test5"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col sparkline">
+      <div class="chart">
+        <div class="label"><span>Sign-ups</span>
+          <h2>1,293</h2>
+        </div>
+        <div class="chart-container">
+          <canvas id="test6"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="col sparkline">
+      <div class="chart">
+        <div class="label"><span>Downloads</span>
+          <h2>758</h2>
+        </div>
+        <div class="chart-container">
+          <canvas id="test7"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+  <div class="row top">
+    <div class="col">
+      <div class="list">
+        <h6>Countries</h6><a href="#"><span class="progress" style="width:62.4%;"></span><span>United States</span><span>62.4%</span></a><a href="#"><span class="progress" style="width:15.0%;"></span><span>India</span><span>15.0%</span></a><a href="#"><span class="progress" style="width:5.0%;"></span><span>United Kingdom</span><span>5.0%</span></a><a href="#"><span class="progress" style="width:5.0%;"></span><span>Canada</span><span>5.0%</span></a><a href="#"><span class="progress" style="width:4.5%;"></span><span>Russia</span><span>4.5%</span></a><a href="#"><span class="progress" style="width:2.3%;"></span><span>Mexico</span><span>2.3%</span></a><a href="#"><span class="progress" style="width:1.7%;"></span><span>Spain</span><span>1.7%</span></a><a href="#"><span class="progress" style="width:1.5%;"></span><span>France</span><span>1.5%</span></a><a href="#"><span class="progress" style="width:1.4%;"></span><span>South Africa</span><span>1.4%</span></a><a href="#"><span class="progress" style="width:1.2%;"></span><span>Japan</span><span>1.2%</span></a>
+      </div><a class="btn primary" href="#">All countries</a>
+    </div>
+    <div class="col flex-start">
+      <div class="list">
+        <h6>Most visited pages</h6><a href="#"><span>/ (Logged out)</span><span>3,929,481</span></a><a href="#"><span>/ (Logged in)</span><span>1,143,393</span></a><a href="#"><span>/tour</span><span>938,287</span></a><a href="#"><span>/features/something</span><span>749,393</span></a><a href="#"><span>/features/another-thing</span><span>695,912</span></a><a href="#"><span>/users/username</span><span>501,938</span></a><a href="#"><span>/page-title</span><span>392,842</span></a><a href="#"><span>/some/page-slug</span><span>298,183</span></a><a href="#"><span>/another/directory/and/page-title</span><span>193,129</span></a><a href="#"><span>/one-more/page/directory/file-name</span><span>93,382</span></a>
+      </div><a class="btn primary" href="#">View all pages</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col list-container">
+      <div class="list">
+        <h6>Devices and resolutions</h6><a href="#"><span>Desktop (1920x1080)</span><span>3,929,481</span></a><a href="#"><span>Desktop (1366x768)</span><span>1,143,393</span></a><a href="#"><span>Desktop (1440x900)</span><span>938,287</span></a><a href="#"><span>Desktop (1280x800)</span><span>749,393</span></a><a href="#"><span>Tablet (1024x768)</span><span>695,912</span></a><a href="#"><span>Tablet (768x1024)</span><span>501,938</span></a><a href="#"><span>Phone (320x480)</span><span>392,842</span></a><a href="#"><span>Phone (720x450)</span><span>298,183</span></a><a href="#"><span>Desktop (2560x1080)</span><span>193,129</span></a><a href="#"><span>Desktop (2560x1080)</span><span>193,129</span></a>
+      </div><a class="btn primary" href="#">View all devices</a>
+    </div>
+  </div>
+</div>
+</div>
+  <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+<script src='https://codepen.io/milesmanners/pen/WOeOrV.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/pikaday/1.6.1/pikaday.min.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/726875/fontawesome.js'></script>
+<script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/726875/solid.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js'></script>
+<script src='https://codepen.io/milesmanners/pen/XgYOPy.js'></script>
+    <script id="rendered-js" >
+// All this JS is for creating charts
+// $mm is just a lightweight jQuery substitution library I made
+// $mm should be mostly swappable for normal jQuery
+
+// This part also creates the click effect
+// See cdpn.io/e/XgYOPy for more details
+let colors = {
+background: $mm.cssVar('background'),
+primary: $mm.cssVar('primary'),
+secondary: $mm.cssVar('secondary') };
+
+
+$mm.merge(burstOpts, {
+colors: [colors.primary, colors.secondary],
+zIndex: 10000 });
+
+
+// Charts
+$mm.fn.extend({
+doughnut: function (attrData) {
+  var data = attrData.data ? attrData.data : {},
+  options = attrData.options ? attrData.options : {};
+
+  data.datasets = data.datasets.map(t => $mm.merge({
+    borderWidth: 2,
+    borderColor: colors.background,
+    hoverBorderColor: 'transparent' },
+  t));
+
+  options = $mm.merge(true, {
+    cutoutPercentage: 80,
+    legend: {
+      display: false },
+
+    title: {
+      position: 'bottom',
+      fontSize: 24 } },
+
+  options);
+
+  return new Chart(this.getContext("2d"), {
+    type: 'doughnut',
+    data: data,
+    options: options });
+
+},
+sparkline: function (attrData) {
+  var data = attrData.data ? attrData.data : {},
+  options = attrData.options ? attrData.options : {};
+
+  data.datasets = data.datasets.map(t => {
+    return $mm.merge({
+      fill: true,
+      backgroundColor: colors.primary + '18',
+      borderColor: colors.primary,
+      pointBorderColor: '#fff',
+      lineTension: 0.25,
+      pointRadius: 0 },
+    t);
+  });
+
+  let max = data.datasets.reduce((a, b) => Math.max(a, Math.max(...b.data)), 0);
+
+  options = $mm.merge(true, {
+    maintainAspectRatio: false,
+    legend: {
+      display: false },
+
+    scales: {
+      xAxes: [{ display: false }],
+      yAxes: [{ display: false, ticks: { min: 0, max: max + 5 } }] },
+
+    tooltips: {
+      enabled: false } },
+
+  options);
+
+  return new Chart(this, {
+    type: 'line',
+    data: data,
+    options: options });
+
+} });
+
+
+// Utility
+$mm.extend({
+randData: (n, max, min = 0) => Array.from({ length: n }, () => $mm.randInt(max, min)) });
+
+
+function formatDate(date) {
+return date.toLocaleDateString('en-us');
+}
+
+let dateInputs = $mm.findAll('#date-range input');
+
+let datePickers = [
+new Pikaday({
+field: dateInputs[0],
+toString: formatDate,
+theme: 'dark-theme' }),
+
+new Pikaday({
+field: dateInputs[1],
+toString: formatDate,
+theme: 'dark-theme' })];
+
+
+
+let date = new Date();
+date.setDate(new Date().getDate() - 7);
+datePickers[0].setDate(date);
+datePickers[1].setDate(new Date());
+
+$mm('#test1').doughnut({
+data: {
+  labels: ['New', 'Returning'],
+  datasets: [{
+    backgroundColor: [colors.primary + 'D0', colors.secondary + 'D0'],
+    hoverBackgroundColor: [colors.primary, colors.secondary],
+    data: $mm.randData(2, 300, 50) }] } });
+
+
+
+
+$mm('#test2').doughnut({
+data: {
+  labels: ['New', 'Recurring'],
+  datasets: [{
+    backgroundColor: [colors.primary + 'D0', colors.secondary + 'D0'],
+    hoverBackgroundColor: [colors.primary, colors.secondary],
+    data: $mm.randData(2, 300, 50) }] } });
+
+
+
+
+$mm('#test3').doughnut({
+data: {
+  labels: ['Direct', 'Referrals'],
+  datasets: [{
+    backgroundColor: [colors.primary + 'D0', colors.secondary + 'D0'],
+    hoverBackgroundColor: [colors.primary, colors.secondary],
+    data: $mm.randData(2, 300, 50) }] } });
+
+
+
+
+let labels = Array.from({ length: 10 }, (v, i) => String.fromCharCode(97 + i));
+
+$mm('#test4').sparkline({
+data: {
+  labels: labels,
+  datasets: [{
+    data: $mm.randData(10, 100, 0) }] } });
+
+
+
+
+$mm('#test5').sparkline({
+data: {
+  labels: labels,
+  datasets: [{
+    data: $mm.randData(10, 100, 0) }] } });
+
+
+
+
+$mm('#test6').sparkline({
+data: {
+  labels: labels,
+  datasets: [{
+    data: $mm.randData(10, 100, 0) }] } });
+
+
+
+
+$mm('#test7').sparkline({
+data: {
+  labels: labels,
+  datasets: [{
+    data: $mm.randData(10, 100, 0) }] } });
+
+
+
+
+$mm('#menu').on('click', e => {
+$mm('#sidebar nav').toggleClass('open');
+});
+//# sourceURL=pen.js
+  </script>
+
+
+
+</body>
+
+</html>

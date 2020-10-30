@@ -1,0 +1,9 @@
+{
+	"name" : "ARDBMS",
+	"description" : "'Artist Relationship Data Base Management System' - Old Incomplete Project",
+	"created" : "18/11/2020",
+	"completed" : "true",
+	"modules" : ["os"],
+	"hosting" : {"hosted" : "false"},
+	"code" : "AR-18112020-123435"
+}
